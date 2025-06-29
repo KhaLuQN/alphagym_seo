@@ -145,7 +145,7 @@ figure img {
   min-height: 72px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+
   overflow: hidden;
 }
 .me-3 {

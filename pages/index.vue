@@ -50,120 +50,7 @@
     </div>
   </section>
 
-  <section class="services">
-    <div class="workout-box front-dark col-md-6 p-0">
-      <img
-        src="/public/images/bodybuilding.jpg"
-        alt="bodybuilding"
-        class="fitnessImg"
-      />
-      <div class="text-content light">
-        <h3 class="colored">Thể hình</h3>
-        <p>
-          Chương trình luyện tập chuyên sâu giúp bạn phát triển cơ bắp, cải
-          thiện thể hình và nâng cao sức mạnh vượt trội.
-        </p>
-        <div class="pix_btn">
-          <a
-            href="#"
-            class="btn btn-effects"
-            data-toggle="modal"
-            data-target="#modalTheHinh"
-          >
-            <svg>
-              <rect x="0" y="0" fill="none" width="100%" height="100%"></rect>
-            </svg>
-            Xem thêm
-            <i class="icon icon-arrow-thin-right hvr-icon"></i>
-          </a>
-        </div>
-      </div>
-      <!--text-content-->
-    </div>
-    <!--workout-box-->
-    <div class="workout-box front-dark col-md-6 p-0">
-      <img src="/public/images/cardio.jpg" alt="cardio" class="fitnessImg" />
-      <div class="text-content light">
-        <h3 class="colored">Tim mạch</h3>
-        <p>
-          Các bài tập linh hoạt phù hợp cho nữ giới, tập trung vào eo, mông, đùi
-          và vóc dáng săn chắc.
-        </p>
-        <div class="pix_btn">
-          <a
-            href="#"
-            class="btn btn-effects"
-            data-toggle="modal"
-            data-target="#modalTimMach"
-          >
-            <svg>
-              <rect x="0" y="0" fill="none" width="100%" height="100%"></rect>
-            </svg>
-            Xem thêm
-            <i class="icon icon-arrow-thin-right hvr-icon"></i>
-          </a>
-        </div>
-      </div>
-      <!--text-content-->
-    </div>
-    <!--workout-box-->
-    <div class="workout-box front-dark col-md-6 p-0">
-      <img src="/public/images/fitness.jpg" alt="fitness" class="fitnessImg" />
-      <div class="text-content light">
-        <h3 class="colored">Sự thích hợp</h3>
-        <p>
-          Lộ trình tập luyện được cá nhân hóa, phù hợp với mọi cấp độ – từ người
-          mới đến vận động viên chuyên nghiệp.
-        </p>
-        <div class="pix_btn">
-          <a
-            href="#"
-            class="btn btn-effects"
-            data-toggle="modal"
-            data-target="#modalPhuHop"
-          >
-            <svg>
-              <rect x="0" y="0" fill="none" width="100%" height="100%"></rect>
-            </svg>
-            Xem thêm
-            <i class="icon icon-arrow-thin-right hvr-icon"></i>
-          </a>
-        </div>
-      </div>
-      <!--text-content-->
-    </div>
-    <!--workout-box-->
-    <div class="workout-box front-dark col-md-6 p-0">
-      <img
-        src="/public/images/crossfit.jpg"
-        alt="crossfit"
-        class="fitnessImg"
-      />
-      <div class="text-content light">
-        <h3 class="colored">Tập thể dục chéo</h3>
-        <p>
-          Phương pháp luyện tập kết hợp nhiều kỹ thuật giúp đốt mỡ, tăng sức
-          bền, cải thiện thể lực toàn diện.
-        </p>
-        <div class="pix_btn">
-          <a
-            href="#"
-            class="btn btn-effects"
-            data-toggle="modal"
-            data-target="#modalCrossfit"
-          >
-            <svg>
-              <rect x="0" y="0" fill="none" width="100%" height="100%"></rect>
-            </svg>
-            Xem thêm
-            <i class="icon icon-arrow-thin-right hvr-icon"></i>
-          </a>
-        </div>
-      </div>
-      <!--text-content-->
-    </div>
-    <!--workout-box-->
-  </section>
+  <HomeArticleCategories :ArticleCategories="ArticleCategories" />
 
   <section class="our-achievements padding-medium">
     <div class="section-header text-center">
@@ -269,16 +156,22 @@
 
 <script setup>
 import { ref } from "vue";
-const [trainersResponse, plansResponse, postsResponse, testimonialsResponse] =
-  await Promise.all([
-    useApiFetch("/trainers"),
-    useApiFetch("/membership-plans"),
-    useApiFetch("/articles?limit=4"),
-    useApiFetch("/testimonials"),
-  ]);
+const [
+  trainersResponse,
+  plansResponse,
+  postsResponse,
+  testimonialsResponse,
+  ArticleCategoriesResponse,
+] = await Promise.all([
+  useApiFetch("/trainers"),
+  useApiFetch("/membership-plans"),
+  useApiFetch("/articles?limit=4"),
+  useApiFetch("/testimonials"),
+  useApiFetch("/article-categories"),
+]);
 const plans = ref(plansResponse.data.value?.data || []);
 const trainers = ref(trainersResponse.data.value?.data || []);
-
 const posts = ref(postsResponse.data.value?.data || []);
 const testimonials = ref(testimonialsResponse.data.value?.data || []);
+const ArticleCategories = ref(ArticleCategoriesResponse.data.value?.data || []);
 </script>
